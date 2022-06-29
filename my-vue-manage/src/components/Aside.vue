@@ -1,6 +1,6 @@
 <template>
   <el-menu default-active="1-4-1" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b"  @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-    <h3>SURYMY管理系统</h3>
+    <h3>{{isCollapse ? '后台' : 'SURYMY管理系统'}}</h3>
     <el-menu-item v-for="item in noChildren" :index="item.path+''" :key="item.path">
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{item.label}}</span>
@@ -23,7 +23,7 @@
     name: 'Aside',
     data() {
       return {
-        isCollapse: false,
+
         menu: [
           {
           path: '/',
@@ -83,6 +83,9 @@
       },
       hasChildren(){
         return this.menu.filter(item => item.children)
+      },
+      isCollapse(){
+        return this.$store.state.tab.isCollapse
       }
     }
   })
